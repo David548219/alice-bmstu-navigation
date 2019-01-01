@@ -2,7 +2,7 @@
 
 #include "Conversion.hpp"
 #include <exception>
-#include <iostream>
+#include <vector>
 
 int OrientationShiftCW(int _orientation) {
   return (_orientation + 1) % 4;
@@ -20,8 +20,6 @@ nav::Response nav::ResponseFromBranches(
         "Подойдите к " + _current->destination->container->id,
         "Подойдите к " + _current->destination->container->id);
   }
-  std::cout << "/" << _current->reverse->orientation << ":"
-            << _prev->orientation << "/";
   if (_prev->reverse->orientation % 2 == _current->orientation % 2) {
     return std::make_pair("Прямо, к " + _current->destination->container->id,
                           "Прямо, к " + _current->destination->container->id);

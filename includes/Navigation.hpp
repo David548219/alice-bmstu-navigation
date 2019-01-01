@@ -8,9 +8,15 @@
 #include <functional>
 #include <limits>
 #include <string>
-#include "Storage.hpp"
+#include <vector>
 
 namespace nav {
+class MapNode {
+ public:
+  std::string id;
+  MapNode(const std::string& _id) { id = _id; }
+  ~MapNode() {}
+};
 class DijkstraGraph {
  public:
   class DijkstraNode;
@@ -57,13 +63,15 @@ class DijkstraGraph {
                  int _secondOrientation,
                  double _weight);
   const std::vector<DijkstraNode*>& GetNodes();
-  void Purge();
   void DeepCalculateMetrics(const std::string& _a, bool _isFirstCall = true);
   std::deque<DijkstraBranch*> AssembleRoute(const std::string& _a,
                                             const std::string& _b);
   void ResetDijkstraCalculationData();
   std::deque<DijkstraBranch*> PlotRoute(const std::string& _a,
                                         const std::string& _b);
+
+ private:
+  void Purge();
 };
 }  // namespace nav
 #endif  // INCLUDES_NAVIGATION_HPP_

@@ -1,9 +1,11 @@
 // Copyright 2018 David david548219@gmail.com
+
 #include <Request.hpp>
 #include <Response.hpp>
 #include <Skill.hpp>
 
-#include "Interface.hpp"
+#include "Navigation.hpp"
+#include "Conversion.hpp"
 
 void bmstu_navigation_callback(const Alice::Request& request,
                                Alice::Response& response) {
