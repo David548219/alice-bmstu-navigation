@@ -3,6 +3,8 @@
 #include <Response.hpp>
 #include <Skill.hpp>
 
+#include "Interface.hpp"
+
 void bmstu_navigation_callback(const Alice::Request& request,
                                Alice::Response& response) {
   response.SetText("Sample Text");
@@ -11,8 +13,8 @@ void bmstu_navigation_callback(const Alice::Request& request,
 }
 
 int main() {
-  Skill skill;
-  skill.SetCallback(bmstu_navigation_callback);
-  skill.Run();
+  Skill NavigatorBmstu;
+  NavigatorBmstu.SetCallback(bmstu_navigation_callback);
+  NavigatorBmstu.Run();
   return 0;
 }

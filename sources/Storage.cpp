@@ -1,5 +1,7 @@
 // Copyright 2018 David david548219@gmail.com
 
+#include <exception>
+#include <random>
 #include "Storage.hpp"
 
 nav::Response nav::ResponseCollection::GetRandomResponse() {

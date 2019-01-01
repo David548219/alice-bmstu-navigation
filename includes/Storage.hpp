@@ -3,12 +3,6 @@
 #ifndef INCLUDES_STORAGE_HPP_
 #define INCLUDES_STORAGE_HPP_
 
-#include <algorithm>
-#include <exception>
-#include <functional>
-#include <limits>
-#include <random>
-#include <stack>
 #include <string>
 #include <vector>
 
@@ -17,7 +11,8 @@ class Container {
  public:
   std::string id;
 };
-using Response = std::pair<std::string, std::string>;
+using Response =
+    std::pair<std::string, std::string>;  // Pair: First - Text; Second - TTS
 using Responses = std::vector<Response>;
 class ResponseCollection {
  public:
@@ -33,17 +28,11 @@ class ResponseCollection {
   Response GetRandomResponse();
 
  private:
-  Responses responses;  // Pair: First - Text; Second - TTS
+  Responses responses;
 };
-enum BranchType { StartingPoint = 0, TurnLeft, TurnRight, GoAhead, GoBackwards, Destination };
 class MapNode : public Container {
  public:
-  MapNode() {
-    id = "nil";
-  }
-  MapNode(const std::string& _id) {
-    id = _id;
-  }
+  MapNode(const std::string& _id) { id = _id; }
   ~MapNode() {}
 };
 }  // namespace nav

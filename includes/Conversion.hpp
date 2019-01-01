@@ -4,11 +4,11 @@
 #define INCLUDES_CONVERSION_HPP_
 
 #include "Storage.hpp"
+#include "Navigation.hpp"
 #include <string>
 
 namespace nav {
 using Response = std::pair<std::string, std::string>;
-Response ResponseFromMapNodes(const nav::MapNode& _origin,
-                              const nav::MapNode& _destination);
+Response ResponseFromBranches(const nav::DijkstraGraph::DijkstraBranch* _current, const nav::DijkstraGraph::DijkstraBranch* _prev = nullptr);
 }  // namespace nav
 #endif  // INCLUDES_CONVERSION_HPP_
