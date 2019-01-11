@@ -46,6 +46,9 @@ add_executable(websocket-chat-server
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/alice-skills-lib/source/Button.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/alice-skills-lib/source/Card.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/alice-skills-lib/source/ButtonPicture.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/sources/Conversion.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/sources/Database.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/sources/Navigation.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp
 )
 
