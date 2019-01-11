@@ -117,7 +117,7 @@ nav::DijkstraGraph::AssembleRoute(const std::string& _a,
   if (_isFirstCall) {
     for (DijkstraBranch* _branch :
          AssembleRoute(_a, _route[0]->destination->container->id, false)) {
-        _route.push_front(_branch);
+      _route.push_front(_branch);
     }
     _route.pop_front();
   }
