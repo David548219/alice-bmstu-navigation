@@ -29,7 +29,7 @@ std::vector<std::string> splitToLowerCase(const std::string& str, char sep) {
 
 void bmstu_navigation_callback(const Alice::Request& _request,
                                Alice::Response& _response) {
-  if (_request.Command() == "") {
+  if (_request.Command().empty()) {
     std::string _string = nav::PickRandomFromVector<std::string>(
         {"Приветствую, скажи откуда и куда тебя провести?",
          "Я могу привести провести в любое место, скажи только откуда и куда.",
@@ -38,7 +38,7 @@ void bmstu_navigation_callback(const Alice::Request& _request,
          "Уже заблудился? Скажи где ты и куда идти, попробую помочь."});
     _response.SetText(_string);
     _response.SetTts(_string);
-    _response.SetEndSession(true);
+    _response.SetEndSession(false);
     return;
   } else {
     std::vector<std::string> _tokens =
@@ -52,18 +52,44 @@ void bmstu_navigation_callback(const Alice::Request& _request,
         _to = _tokens[_i + 1];
       }
     }
+    if (_from.empty() && _to.empty()) {
+      std::string _string = nav::PickRandomFromVector<std::string>(
+          {"Не знаю к чему это вы, мы тут вроде маршруты строим?",
+           "Я вас не поняла.", "Поробуйте ещё раз, это не сработало."});
+      _response.SetText(_string);
+      _response.SetTts(_string);
+      _response.SetEndSession(false);
+      return;
+    } else if (_from.empty()) {
+      std::string _string = nav::PickRandomFromVector<std::string>(
+          {"Сложно прокладывать маршруты без начальной точки!",
+           "Вы не указали начальную точку.", "А откуда мы начинаем путь?"});
+      _response.SetText(_string);
+      _response.SetTts(_string);
+      _response.SetEndSession(false);
+      return;
+    } else if (_to.empty()) {
+      std::string _string = nav::PickRandomFromVector<std::string>(
+          {"У всего есть конец, а у вашего пути нет! В следующий раз укажите "
+           "его.",
+           "Вы забыли указать конечную точку.",
+           "Без конечной точки я не смогу вам помочь."});
+      _response.SetText(_string);
+      _response.SetTts(_string);
+      _response.SetEndSession(false);
+      return;
+    }
     nav::DijkstraGraph _graph;
     nav::PopulateGraph(_graph, "ulk");
     if (!nav::TryGetIdFromAlias(_graph, _from, _from) ||
         !nav::TryGetIdFromAlias(_graph, _to, _to)) {
       std::string _string = nav::PickRandomFromVector<std::string>(
           {"Не припоминаю таких мест, вы не ошиблись?",
-           "А вы точно правильно указали точки?"
-           "Такого на карте нет!",
+           "А вы точно правильно указали точки?", "Такого на карте нет!",
            "Кажется произошла ошибка, таких точек нет."});
       _response.SetText(_string);
       _response.SetTts(_string);
-      _response.SetEndSession(true);
+      _response.SetEndSession(false);
       return;
     }
     nav::Response _r = nav::ResponseFromRoute(_graph.PlotRoute(_from, _to));
