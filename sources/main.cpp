@@ -33,11 +33,12 @@ void bmstu_navigation_callback(const Alice::Request& _request,
     std::string _string = nav::PickRandomFromVector<std::string>(
         {"Приветствую, скажи откуда и куда тебя провести?",
          "Я могу привести провести в любое место, скажи только откуда и куда.",
-         "В МГТУ столько интересных мест, скажи куда и откуда, я помогу найти  "
+         "В МГТУ столько интересных мест, скажи куда и откуда, я помогу найти "
          "дорогу.",
          "Уже заблудился? Скажи где ты и куда идти, попробую помочь."});
     _response.SetText(_string);
     _response.SetTts(_string);
+    _response.SetEndSession(true);
     return;
   } else {
     std::vector<std::string> _tokens =
@@ -62,11 +63,13 @@ void bmstu_navigation_callback(const Alice::Request& _request,
            "Кажется произошла ошибка, таких точек нет."});
       _response.SetText(_string);
       _response.SetTts(_string);
+      _response.SetEndSession(true);
       return;
     }
     nav::Response _r = nav::ResponseFromRoute(_graph.PlotRoute(_from, _to));
     _response.SetText(_r.first);
     _response.SetTts(_r.second);
+    _response.SetEndSession(true);
     return;
   }
 }
