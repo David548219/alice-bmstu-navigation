@@ -31,11 +31,11 @@ void bmstu_navigation_callback(const Alice::Request& _request,
                                Alice::Response& _response) {
   if (_request.Command() == "") {
     std::string _string = nav::PickRandomFromVector<std::string>(
-        {"Приветствую, скажи откуда и куда тебя провести?",
-         "Я могу привести провести в любое место, скажи только откуда и куда.",
-         "В МГТУ столько интересных мест, скажи куда и откуда, я помогу найти "
-         "дорогу.",
-         "Уже заблудился? Скажи где ты и куда идти, попробую помочь."});
+        {"РџСЂРёРІРµС‚СЃС‚РІСѓСЋ, СЃРєР°Р¶Рё РѕС‚РєСѓРґР° Рё РєСѓРґР° С‚РµР±СЏ РїСЂРѕРІРµСЃС‚Рё?",
+         "РЇ РјРѕРіСѓ РїСЂРёРІРµСЃС‚Рё РїСЂРѕРІРµСЃС‚Рё РІ Р»СЋР±РѕРµ РјРµСЃС‚Рѕ, СЃРєР°Р¶Рё С‚РѕР»СЊРєРѕ РѕС‚РєСѓРґР° Рё РєСѓРґР°.",
+         "Р’ РњР“РўРЈ СЃС‚РѕР»СЊРєРѕ РёРЅС‚РµСЂРµСЃРЅС‹С… РјРµСЃС‚, СЃРєР°Р¶Рё РєСѓРґР° Рё РѕС‚РєСѓРґР°, СЏ РїРѕРјРѕРіСѓ РЅР°Р№С‚Рё "
+         "РґРѕСЂРѕРіСѓ.",
+         "РЈР¶Рµ Р·Р°Р±Р»СѓРґРёР»СЃСЏ? РЎРєР°Р¶Рё РіРґРµ С‚С‹ Рё РєСѓРґР° РёРґС‚Рё, РїРѕРїСЂРѕР±СѓСЋ РїРѕРјРѕС‡СЊ."});
     _response.SetText(_string);
     _response.SetTts(_string);
     _response.SetEndSession(true);
@@ -46,9 +46,9 @@ void bmstu_navigation_callback(const Alice::Request& _request,
     std::string _from;
     std::string _to;
     for (int _i = 0; _i < _tokens.size(); ++_i) {
-      if (_tokens[_i] == "из" && _i < _tokens.size() - 1) {
+      if (_tokens[_i] == "РёР·" && _i < _tokens.size() - 1) {
         _from = _tokens[_i + 1];
-      } else if (_tokens[_i] == "в" && _i < _tokens.size() - 1) {
+      } else if (_tokens[_i] == "РІ" && _i < _tokens.size() - 1) {
         _to = _tokens[_i + 1];
       }
     }
@@ -57,10 +57,10 @@ void bmstu_navigation_callback(const Alice::Request& _request,
     if (!nav::TryGetIdFromAlias(_graph, _from, _from) ||
         !nav::TryGetIdFromAlias(_graph, _to, _to)) {
       std::string _string = nav::PickRandomFromVector<std::string>(
-          {"Не припоминаю таких мест, вы не ошиблись?",
-           "А вы точно правильно указали точки?"
-           "Такого на карте нет!",
-           "Кажется произошла ошибка, таких точек нет."});
+          {"РќРµ РїСЂРёРїРѕРјРёРЅР°СЋ С‚Р°РєРёС… РјРµСЃС‚, РІС‹ РЅРµ РѕС€РёР±Р»РёСЃСЊ?",
+           "Рђ РІС‹ С‚РѕС‡РЅРѕ РїСЂР°РІРёР»СЊРЅРѕ СѓРєР°Р·Р°Р»Рё С‚РѕС‡РєРё?"
+           "РўР°РєРѕРіРѕ РЅР° РєР°СЂС‚Рµ РЅРµС‚!",
+           "РљР°Р¶РµС‚СЃСЏ РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°, С‚Р°РєРёС… С‚РѕС‡РµРє РЅРµС‚."});
       _response.SetText(_string);
       _response.SetTts(_string);
       _response.SetEndSession(true);
