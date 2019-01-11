@@ -20,6 +20,8 @@ T PickRandomFromVector(std::vector<T> _v) {
 }
 using Response =
     std::pair<std::string, std::string>;  // Pair: First - Text; Second - TTS
+int OrientationShiftCW(int _orientation);
+int OrientationShiftCCW(int _orientation);
 Response ResponseFromBranches(
     const nav::DijkstraGraph::DijkstraBranch* _current,
     const nav::DijkstraGraph::DijkstraBranch* _prev = nullptr);

@@ -14,7 +14,26 @@ namespace nav {
 class MapNode {
  public:
   std::string id;
-  MapNode(const std::string& _id) { id = _id; }
+  std::vector<std::string> alias;  // alias[0] is the name of MapNode
+  bool isVisibleInSearch;
+  bool isJunction;
+  MapNode(const std::string& _id,
+          const std::vector<std::string>& _alias,
+          bool _isJunction = false,
+          bool _isVisibleInSearch = true) {
+    id = _id;
+    alias = _alias;
+    isVisibleInSearch = _isVisibleInSearch;
+    isJunction = _isJunction;
+  }
+  MapNode(const std::string& _id,
+          bool _isJunction = true,
+          bool _isVisibleInSearch = false) {
+    id = _id;
+    alias = {_id};
+    isVisibleInSearch = _isVisibleInSearch;
+    isJunction = _isJunction;
+  }
   ~MapNode() {}
 };
 class DijkstraGraph {
@@ -65,7 +84,7 @@ class DijkstraGraph {
   const std::vector<DijkstraNode*>& GetNodes();
   void DeepCalculateMetrics(const std::string& _a, bool _isFirstCall = true);
   std::deque<DijkstraBranch*> AssembleRoute(const std::string& _a,
-                                            const std::string& _b);
+                                            const std::string& _b, bool _isFirstCall = true);
   void ResetDijkstraCalculationData();
   std::deque<DijkstraBranch*> PlotRoute(const std::string& _a,
                                         const std::string& _b);

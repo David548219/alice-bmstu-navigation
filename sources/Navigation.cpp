@@ -87,28 +87,40 @@ bool DoubleEpsilonCompare(double _a, double _b) {
 
 std::deque<nav::DijkstraGraph::DijkstraBranch*>
 nav::DijkstraGraph::AssembleRoute(const std::string& _a,
-                                  const std::string& _b) {
+                                  const std::string& _b,
+                                  bool _isFirstCall) {
   std::deque<DijkstraBranch*> _route;
   DijkstraNode* _current = FindNode(_b);
   double _routeRemainingLength = _current->nodeWeight;
+  bool _noJunctionsMet = true;
   while (!DoubleEpsilonCompare(_routeRemainingLength, 0.0)) {
     for (DijkstraBranch* _branch : _current->branches) {
       if (DoubleEpsilonCompare(
               (_routeRemainingLength - _branch->weight),
               FindNode(_branch->destination->container->id)->nodeWeight)) {
         _routeRemainingLength -= _branch->weight;
-        _route.push_front(_branch->reverse);
+        if (_branch->reverse->destination->container->isJunction ||
+            ((_route.empty()) ||
+             (_noJunctionsMet &&
+              ((_route[0]->orientation + _branch->orientation) % 4) % 2 ==
+                  1))) {
+          if (_branch->destination->container->isJunction) {
+            _noJunctionsMet = false;
+          }
+          _route.push_front(_branch->reverse);
+        }
         _current = _branch->destination;
         break;
       }
     }
   }
-  _route.push_front(*(find_if(
-      _route.front()->destination->branches.begin(),
-      _route.front()->destination->branches.end(),
-                [&_a](const DijkstraBranch* _branch) {
-                  return _branch->destination->container->id == _a;
-                })));
+  if (_isFirstCall) {
+    for (DijkstraBranch* _branch :
+         AssembleRoute(_a, _route[0]->destination->container->id, false)) {
+        _route.push_front(_branch);
+    }
+    _route.pop_front();
+  }
   return _route;
 }
 

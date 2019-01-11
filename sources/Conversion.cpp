@@ -4,11 +4,11 @@
 #include <exception>
 #include <vector>
 
-int OrientationShiftCW(int _orientation) {
+int nav::OrientationShiftCW(int _orientation) {
   return (_orientation + 1) % 4;
 }
 
-int OrientationShiftCCW(int _orientation) {
+int nav::OrientationShiftCCW(int _orientation) {
   return _orientation == 0 ? 3 : _orientation - 1;
 }
 
