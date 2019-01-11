@@ -46,28 +46,28 @@ nav::Direction nav::GetMoveDirection(
 
 nav::Response nav::ResponseFromRoute(
     const std::deque<nav::DijkstraGraph::DijkstraBranch*>& _route) {
-  Response _response = std::make_pair("", "Маршрут построен");
+  Response _response = std::make_pair("", "РњР°СЂС€СЂСѓС‚ РїРѕСЃС‚СЂРѕРµРЅ");
   for (size_t i = 0; i < _route.size(); i++) {
     std::string _currentStep = std::to_string(i + 1) + ": ";
     if (i == 0) {
-      _currentStep = "Выйдите из кабинета";
+      _currentStep = "Р’С‹Р№РґРёС‚Рµ РёР· РєР°Р±РёРЅРµС‚Р°";
     } else if (i == _route.size() - 1) {
       Direction _direction = GetMoveDirection(_route[i], _route[i - 1]);
       if (_direction == Direction::Forward) {
-        _currentStep = "Идите прямо до точки назначения";
+        _currentStep = "РРґРёС‚Рµ РїСЂСЏРјРѕ РґРѕ С‚РѕС‡РєРё РЅР°Р·РЅР°С‡РµРЅРёСЏ";
       } else if (_direction == Direction::Left) {
-        _currentStep = "Идите прямо, точка назначения будет слева";
+        _currentStep = "РРґРёС‚Рµ РїСЂСЏРјРѕ, С‚РѕС‡РєР° РЅР°Р·РЅР°С‡РµРЅРёСЏ Р±СѓРґРµС‚ СЃР»РµРІР°";
       } else if (_direction == Direction::Right) {
-        _currentStep = "Идите прямо, точка назначения будет справа";
+        _currentStep = "РРґРёС‚Рµ РїСЂСЏРјРѕ, С‚РѕС‡РєР° РЅР°Р·РЅР°С‡РµРЅРёСЏ Р±СѓРґРµС‚ СЃРїСЂР°РІР°";
       }
     } else {
       Direction _direction = GetMoveDirection(_route[i], _route[i - 1]);
       if (_direction == Direction::Forward) {
-        _currentStep = "Идите прямо";
+        _currentStep = "РРґРёС‚Рµ РїСЂСЏРјРѕ";
       } else if (_direction == Direction::Left) {
-        _currentStep = "Поверните налево";
+        _currentStep = "РџРѕРІРµСЂРЅРёС‚Рµ РЅР°Р»РµРІРѕ";
       } else if (_direction == Direction::Right) {
-        _currentStep = "Поверните направо";
+        _currentStep = "РџРѕРІРµСЂРЅРёС‚Рµ РЅР°РїСЂР°РІРѕ";
       }
     }
 
