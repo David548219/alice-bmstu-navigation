@@ -25,21 +25,16 @@ void nav::DijkstraGraph::AddBranch(const std::string& _firstId,
                                    const std::string& _secondId,
                                    int _secondOrientation,
                                    double _weight) {
-  auto _nodeFirst = FindNode(_firstId);
-  auto _nodeSecond = FindNode(_secondId);
-  auto _branchFirst =
+  auto* _nodeFirst = FindNode(_firstId);
+  auto* _nodeSecond = FindNode(_secondId);
+  auto* _branchFirst =
       new DijkstraBranch(_nodeSecond, _weight, _firstOrientation);
-  auto _branchSecond =
+  auto* _branchSecond =
       new DijkstraBranch(_nodeFirst, _weight, _secondOrientation);
   _branchFirst->reverse = _branchSecond;
   _branchSecond->reverse = _branchFirst;
   _nodeFirst->branches.push_back(_branchFirst);
   _nodeSecond->branches.push_back(_branchSecond);
-}
-
-const std::vector<nav::DijkstraGraph::DijkstraNode*>&
-nav::DijkstraGraph::GetNodes() {
-  return nodes;
 }
 
 void nav::DijkstraGraph::Purge() {

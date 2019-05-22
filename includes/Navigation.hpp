@@ -81,7 +81,7 @@ class DijkstraGraph {
                  const std::string& _secondId,
                  int _secondOrientation,
                  double _weight);
-  const std::vector<DijkstraNode*>& GetNodes();
+  const std::vector<DijkstraNode*>& GetNodes() { return nodes; }
   void DeepCalculateMetrics(const std::string& _a, bool _isFirstCall = true);
   std::deque<DijkstraBranch*> AssembleRoute(const std::string& _a,
                                             const std::string& _b, bool _isFirstCall = true);
