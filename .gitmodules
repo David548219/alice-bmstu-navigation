@@ -1,0 +1,4 @@
+[submodule "tools/alice-skills-lib"]
+	path = tools/alice-skills-lib
+	url = https://github.com/Avsyankaa/alice-heroku.git
+	branch = new

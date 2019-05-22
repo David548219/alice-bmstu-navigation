@@ -1,0 +1,217 @@
+// Copyright 2018 David david548219@gmail.com
+
+#include "Database.hpp"
+#include <exception>
+
+void PopulateGraphDebug(nav::DijkstraGraph& _graph) {
+  _graph.AddNode(new nav::MapNode("1"));
+  _graph.AddNode(new nav::MapNode("2"));
+  _graph.AddNode(new nav::MapNode("3"));
+  _graph.AddNode(new nav::MapNode("4"));
+  _graph.AddNode(new nav::MapNode("5"));
+  _graph.AddNode(new nav::MapNode("6"));
+  _graph.AddBranch("1", 3, "6", 2, 14);
+  _graph.AddBranch("1", 0, "3", 0, 9);
+  _graph.AddBranch("1", 1, "2", 3, 7);
+  _graph.AddBranch("2", 0, "3", 2, 10);
+  _graph.AddBranch("3", 3, "6", 2, 2);
+  _graph.AddBranch("2", 1, "4", 2, 15);
+  _graph.AddBranch("3", 1, "4", 3, 11);
+  _graph.AddBranch("6", 0, "5", 3, 9);
+  _graph.AddBranch("5", 1, "4", 0, 6);
+}
+
+void PopulateGraphUlk(nav::DijkstraGraph& _graph) {
+  // 6th floor
+  _graph.AddNode(new nav::MapNode("room_601", {"601"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_601", false, false));
+  _graph.AddNode(new nav::MapNode("room_602", {"602"}, true, false));
+  _graph.AddNode(new nav::MapNode("room_602a", {"602а"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_603", {"603"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_602", false, false));
+  _graph.AddNode(new nav::MapNode("room_604", {"604"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_607", {"607"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_603", true, false));
+  _graph.AddNode(new nav::MapNode("node_604", true, false));
+  _graph.AddNode(new nav::MapNode("room_606", {"606"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_610a", {"610а"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_610", {"610"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_605", true, false));
+  _graph.AddNode(new nav::MapNode("node_606", false, false));
+  _graph.AddNode(new nav::MapNode("node_607", true, false));
+  _graph.AddNode(new nav::MapNode("shaft_601", {"Лестница"}, false, false));
+  _graph.AddNode(new nav::MapNode("room_611", {"611"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_608", true, false));
+  _graph.AddNode(
+      new nav::MapNode("shaft_602", {"Лифтовый холл"}, false, false));
+  _graph.AddNode(new nav::MapNode("room_613", {"613"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_609", false, false));
+  _graph.AddNode(new nav::MapNode("shaft_603", {"Лестница"}, false, false));
+  _graph.AddNode(new nav::MapNode("room_615", {"605"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_610", false, false));
+  _graph.AddNode(new nav::MapNode("room_617", {"617"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_611", false, true));
+  _graph.AddNode(new nav::MapNode("room_618", {"618"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_619", {"619"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_612", false, false));
+  _graph.AddNode(new nav::MapNode("node_613", false, false));
+  _graph.AddNode(new nav::MapNode("room_620", {"620"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_621", {"621"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_614", false, false));
+  _graph.AddNode(new nav::MapNode("room_622", {"622"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_623", {"623"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_615", false, false));
+  _graph.AddNode(new nav::MapNode("room_624", {"624"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_616", false, false));
+  _graph.AddNode(new nav::MapNode("room_624a", {"624а"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_625", {"625"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_617", false, false));
+  _graph.AddNode(new nav::MapNode("room_625a", {"625а"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_618", false, false));
+  _graph.AddNode(new nav::MapNode("room_627", {"627"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_619", false, false));
+  _graph.AddNode(new nav::MapNode("room_627a", {"627а"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_620", false, false));
+  _graph.AddNode(new nav::MapNode("room_629", {"629"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_621", false, false));
+  _graph.AddNode(new nav::MapNode("room_630", {"630"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_629a", {"629а"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_622", false, false));
+  _graph.AddNode(new nav::MapNode("room_630a", {"630а"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_631", {"631"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_623", false, false));
+  _graph.AddNode(new nav::MapNode("room_632", {"632"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_624", false, false));
+  _graph.AddNode(new nav::MapNode("room_632a", {"632а"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_633", {"633"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_625", false, false));
+  _graph.AddNode(new nav::MapNode("room_634", {"634"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_633a", {"633а"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_626", false, false));
+  _graph.AddNode(new nav::MapNode("room_634a", {"634а"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_635", {"635"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_627", false, false));
+  _graph.AddNode(new nav::MapNode("room_636", {"636"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_637", {"636а"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_628", false, true));
+  _graph.AddNode(new nav::MapNode("room_636a", {"636а"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_639", {"639"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_629", false, false));
+  _graph.AddNode(new nav::MapNode("shaft_604", {"Лестница"}, false, false));
+  _graph.AddNode(new nav::MapNode("node_630", true, false));
+  _graph.AddNode(
+      new nav::MapNode("shaft_605", {"Лифтовый холл"}, false, false));
+  _graph.AddNode(new nav::MapNode("node_631", true, false));
+  _graph.AddNode(new nav::MapNode("node_632", true, false));
+  _graph.AddNode(new nav::MapNode("shaft_606", {"Лестница"}, false, false));
+  _graph.AddNode(new nav::MapNode("room_646", {"646"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_633", true, false));
+  _graph.AddNode(new nav::MapNode("node_634", false, false));
+  _graph.AddNode(new nav::MapNode("node_635", true, false));
+  _graph.AddNode(new nav::MapNode("room_647", {"647"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_649", {"649"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_636", false, false));
+  _graph.AddNode(new nav::MapNode("room_648", {"648"}, false, true));
+  _graph.AddNode(new nav::MapNode("room_651", {"651"}, false, true));
+  _graph.AddNode(new nav::MapNode("node_637", false, false));
+  _graph.AddNode(new nav::MapNode("room_650", {"650"}, false, true));
+  _graph.AddBranch("room_601", 0, "node_601", 2, 1);
+  _graph.AddBranch("node_601", 0, "room_602", 2, 1);
+  _graph.AddBranch("node_601", 1, "node_602", 3, 1);
+  _graph.AddBranch("room_602", 1, "room_602a", 3, 1);
+  _graph.AddBranch("room_603", 0, "node_602", 2, 1);
+  _graph.AddBranch("node_602", 0, "room_604", 2, 1);
+  _graph.AddBranch("room_607", 1, "node_603", 3, 1);
+  _graph.AddBranch("node_602", 1, "node_604", 3, 1);
+  _graph.AddBranch("node_603", 0, "node_604", 2, 1);
+  _graph.AddBranch("node_603", 1, "node_605", 3, 1);
+  _graph.AddBranch("node_604", 1, "room_606", 1, 1);
+  _graph.AddBranch("node_605", 0, "node_606", 2, 1);
+  _graph.AddBranch("room_610a", 1, "node_606", 3, 1);
+  _graph.AddBranch("node_606", 0, "node_607", 2, 1);
+  _graph.AddBranch("room_610", 1, "node_607", 3, 1);
+  _graph.AddBranch("node_607", 0, "shaft_601", 2, 1);
+  _graph.AddBranch("node_606", 1, "room_611", 3, 1);
+  _graph.AddBranch("node_607", 1, "node_608", 3, 1);
+  _graph.AddBranch("node_608", 0, "shaft_602", 2, 1);
+  _graph.AddBranch("node_608", 1, "node_609", 3, 1);
+  _graph.AddBranch("room_613", 0, "node_609", 2, 1);
+  _graph.AddBranch("node_609", 0, "shaft_603", 2, 1);
+  _graph.AddBranch("node_609", 1, "node_610", 3, 1);
+  _graph.AddBranch("room_615", 0, "node_610", 2, 1);
+  _graph.AddBranch("node_610", 1, "node_611", 3, 1);
+  _graph.AddBranch("room_617", 0, "node_611", 2, 1);
+  _graph.AddBranch("node_611", 0, "room_618", 2, 1);
+  _graph.AddBranch("node_611", 1, "node_612", 3, 1);
+  _graph.AddBranch("room_619", 0, "node_612", 2, 1);
+  _graph.AddBranch("node_612", 1, "node_613", 3, 1);
+  _graph.AddBranch("node_613", 0, "room_620", 2, 1);
+  _graph.AddBranch("node_613", 1, "node_614", 3, 1);
+  _graph.AddBranch("room_621", 0, "node_614", 2, 1);
+  _graph.AddBranch("node_614", 0, "room_622", 2, 1);
+  _graph.AddBranch("node_614", 1, "node_615", 3, 1);
+  _graph.AddBranch("room_623", 0, "node_615", 2, 1);
+  _graph.AddBranch("node_615", 0, "room_624", 2, 1);
+  _graph.AddBranch("node_615", 1, "node_616", 3, 1);
+  _graph.AddBranch("node_616", 0, "room_624a", 2, 1);
+  _graph.AddBranch("node_616", 1, "node_617", 3, 1);
+  _graph.AddBranch("room_625", 0, "node_617", 2, 1);
+  _graph.AddBranch("node_617", 1, "node_618", 3, 1);
+  _graph.AddBranch("room_625a", 0, "node_618", 2, 1);
+  _graph.AddBranch("node_618", 1, "node_619", 3, 1);
+  _graph.AddBranch("room_627", 0, "node_619", 2, 1);
+  _graph.AddBranch("node_619", 1, "node_620", 3, 1);
+  _graph.AddBranch("room_627a", 0, "node_620", 2, 1);
+  _graph.AddBranch("node_620", 1, "node_621", 3, 1);
+  _graph.AddBranch("room_629", 0, "node_621", 2, 1);
+  _graph.AddBranch("node_621", 0, "room_630", 2, 1);
+  _graph.AddBranch("node_621", 1, "node_622", 3, 1);
+  _graph.AddBranch("room_629a", 0, "node_622", 2, 1);
+  _graph.AddBranch("node_622", 0, "room_630a", 2, 1);
+  _graph.AddBranch("node_622", 1, "node_623", 3, 1);
+  _graph.AddBranch("room_631", 0, "node_623", 2, 1);
+  _graph.AddBranch("node_623", 0, "room_632", 2, 1);
+  _graph.AddBranch("node_623", 1, "node_624", 3, 1);
+  _graph.AddBranch("node_624", 0, "room_632a", 2, 1);
+  _graph.AddBranch("node_624", 1, "node_625", 3, 1);
+  _graph.AddBranch("room_633", 0, "node_625", 2, 1);
+  _graph.AddBranch("node_625", 0, "room_634", 2, 1);
+  _graph.AddBranch("node_625", 1, "node_626", 3, 1);
+  _graph.AddBranch("room_633a", 0, "node_626", 2, 1);
+  _graph.AddBranch("node_626", 0, "room_634a", 2, 1);
+  _graph.AddBranch("node_626", 1, "node_627", 3, 1);
+  _graph.AddBranch("room_635", 0, "node_627", 2, 1);
+  _graph.AddBranch("node_627", 0, "room_636", 2, 1);
+  _graph.AddBranch("node_627", 1, "node_628", 3, 1);
+  _graph.AddBranch("room_637", 0, "node_628", 2, 1);
+  _graph.AddBranch("node_628", 0, "room_636a", 2, 1);
+  _graph.AddBranch("node_628", 1, "node_629", 3, 1);
+  _graph.AddBranch("room_639", 0, "node_629", 2, 1);
+  _graph.AddBranch("node_629", 0, "shaft_604", 2, 1);
+  _graph.AddBranch("node_629", 1, "node_630", 3, 1);
+  _graph.AddBranch("node_630", 0, "shaft_605", 2, 1);
+  _graph.AddBranch("node_630", 1, "node_632", 3, 1);
+  _graph.AddBranch("node_632", 0, "shaft_606", 2, 1);
+  _graph.AddBranch("node_631", 0, "node_632", 2, 1);
+  _graph.AddBranch("node_631", 1, "node_633", 3, 1);
+  _graph.AddBranch("node_633", 0, "node_634", 2, 1);
+  _graph.AddBranch("room_646", 1, "node_634", 3, 1);
+  _graph.AddBranch("node_634", 0, "node_635", 2, 1);
+  _graph.AddBranch("room_647", 3, "node_634", 1, 1);
+  _graph.AddBranch("node_635", 1, "node_636", 3, 1);
+  _graph.AddBranch("room_649", 0, "node_636", 2, 1);
+  _graph.AddBranch("node_636", 0, "room_648", 2, 1);
+  _graph.AddBranch("node_636", 1, "node_637", 3, 1);
+  _graph.AddBranch("room_651", 0, "node_637", 2, 1);
+  _graph.AddBranch("node_637", 0, "room_650", 2, 1);
+}
+
+void nav::PopulateGraph(nav::DijkstraGraph& _graph, const std::string& _mapId) {
+  if (_mapId == "ulk") {
+    PopulateGraphUlk(_graph);
+  } else if (_mapId == "debug") {
+    PopulateGraphDebug(_graph);
+  } else {
+    throw std::invalid_argument("Map ID not present in the database");
+  }
+}
