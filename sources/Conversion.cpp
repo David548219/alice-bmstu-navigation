@@ -47,12 +47,15 @@ nav::Direction nav::GetMoveDirection(
 nav::Response nav::ResponseFromRoute(
     const std::deque<nav::DijkstraGraph::DijkstraBranch*>& _route) {
   Response _response = std::make_pair("", "Маршрут построен");
-  for (size_t i = 0; i < _route.size(); i++) {
+  size_t size = _route.size();
+  auto prev = _route.front();
+  for (size_t i = 0; i < size; i++) {
     std::string _currentStep = std::to_string(i + 1) + ": ";
     if (i == 0) {
       _currentStep = "Выйдите из кабинета";
-    } else if (i == _route.size() - 1) {
-      Direction _direction = GetMoveDirection(_route[i], _route[i - 1]);
+    } else if (i == size - 1) {
+      _route.pop_front();
+      Direction _direction = GetMoveDirection(_route.front(), prev);
       if (_direction == Direction::Forward) {
         _currentStep = "Идите прямо до точки назначения";
       } else if (_direction == Direction::Left) {
@@ -60,8 +63,10 @@ nav::Response nav::ResponseFromRoute(
       } else if (_direction == Direction::Right) {
         _currentStep = "Идите прямо, точка назначения будет справа";
       }
+      prev = _route.front();
     } else {
-      Direction _direction = GetMoveDirection(_route[i], _route[i - 1]);
+      _route.pop_front();
+      Direction _direction = GetMoveDirection(_route.front(), prev);
       if (_direction == Direction::Forward) {
         _currentStep = "Идите прямо";
       } else if (_direction == Direction::Left) {
@@ -69,6 +74,7 @@ nav::Response nav::ResponseFromRoute(
       } else if (_direction == Direction::Right) {
         _currentStep = "Поверните направо";
       }
+      prev = _route.front();
     }
 
     if (i != _route.size() - 1) {
